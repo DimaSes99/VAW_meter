@@ -1,11 +1,12 @@
 #include "VAW_functions.h"
 
+int16_t voltageCalDots[5] = {-46, 5757, 11404, 17128, 22862};
+float const voltageCalK[5] = {0.838, 0.839, 0.839, 0.839, 0.838};
+float const voltageCalB[5] = {38.541, 31.707, 36.897, 32.075, 62.870};
 
-float const voltageCalK[5] = {0.838, 0.840, 0.840, 0.838, 0.839};
-float const voltageCalB[5] = {7, -8.619, -6.698, 16.240, -8.595};
-
-float const currentCalK[6] = {1.135, 1.142, 1.136, 1.139, 1.131, 1.105};
-float const currentCalB[6] = {13.618, 13.087, 14.221, 12.886, 20.086, 134.374};
+int16_t currentCalDots[7] = {-48, -4, 45, 394, 828, 1702, 4350};
+float const currentCalK[7] = {1.159, 1.122, 1.146, 1.145, 1.141, 1.137, 1.122};
+float const currentCalB[7] = {55.636, 55.490, 54.424, 54.806, 58.474, 65.325, 128.009};
 
 int16_t getCurrent(void) {
 #ifdef USE_MEDIAN_FILTER
@@ -19,18 +20,22 @@ int16_t getCurrent(void) {
     float valFiltered = (float) getRunningAvgC(ADS_readSingle(CURRENT_MUX)); //медиана
 #endif
     float current;
-    if (valFiltered <= 77) {
+    if (valFiltered < currentCalDots[0]) {
+        current = 0;
+    } else if (valFiltered >= currentCalDots[0] && valFiltered < currentCalDots[1]) {
         current = valFiltered * currentCalK[0] + currentCalB[0];
-    } else if (valFiltered > 77 && valFiltered <= 204) {
+    } else if (valFiltered >= currentCalDots[1] && valFiltered < currentCalDots[2]) {
         current = valFiltered * currentCalK[1] + currentCalB[1];
-    } else if (valFiltered > 204 && valFiltered <= 439) {
+    } else if (valFiltered >= currentCalDots[2] && valFiltered < currentCalDots[3]) {
         current = valFiltered * currentCalK[2] + currentCalB[2];
-    } else if (valFiltered > 439 && valFiltered <= 870) {
+    } else if (valFiltered >= currentCalDots[3] && valFiltered < currentCalDots[4]) {
         current = valFiltered * currentCalK[3] + currentCalB[3];
-    } else if (valFiltered > 870 && valFiltered <= 4429) {
+    } else if (valFiltered >= currentCalDots[4] && valFiltered < currentCalDots[5]) {
         current = valFiltered * currentCalK[4] + currentCalB[4];
-    } else {
+    } else if (valFiltered >= currentCalDots[5] && valFiltered < currentCalDots[6]) {
         current = valFiltered * currentCalK[5] + currentCalB[5];
+    } else {
+        current = valFiltered * currentCalK[6] + currentCalB[6];
     }
     return (int16_t) (current);
 }
@@ -44,18 +49,18 @@ int32_t getVoltage(void) {
     float valFiltered = (float) getMedian(voltageArr, SAMPLES); //медиана
 #endif
 #ifdef USE_RUNNING_AVG_FILTER
-    ADS_startSingleConv();
-    while (ADS_convReady() == 0); //дождаться конца преобразования
     float valFiltered = (float) getRunningAvgV(ADS_readSingle(VOLTAGE_MUX)); //медиана
 #endif
     float voltage;
-    if (valFiltered <= 6004) { //преобразование и интерполяция
+    if (valFiltered < voltageCalDots[0]) { //преобразование и интерполяция
+        voltage = 0;
+    } else if (valFiltered >= voltageCalDots[0] && valFiltered < voltageCalDots[1]) {
         voltage = valFiltered * voltageCalK[0] + voltageCalB[0];
-    } else if (valFiltered > 6004 && valFiltered <= 11937) {
+    } else if (valFiltered >= voltageCalDots[1] && valFiltered < voltageCalDots[2]) {
         voltage = valFiltered * voltageCalK[1] + voltageCalB[1];
-    } else if (valFiltered > 11937 && valFiltered <= 17970) {
+    } else if (valFiltered >= voltageCalDots[2] && valFiltered < voltageCalDots[3]) {
         voltage = valFiltered * voltageCalK[2] + voltageCalB[2];
-    } else if (valFiltered > 17970 && valFiltered <= 23875) {
+    } else if (valFiltered >= voltageCalDots[3] && valFiltered < voltageCalDots[4])  {
         voltage = valFiltered * voltageCalK[3] + voltageCalB[3];
     } else {
         voltage = valFiltered * voltageCalK[4] + voltageCalB[4];

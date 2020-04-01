@@ -18,7 +18,7 @@
 #endif
 
 #ifdef USE_RUNNING_AVG_FILTER
-#define FILTER_COEF 0.4
+#define FILTER_COEF 0.5
 #endif
 
 #define VOLTAGE_MUX MUX_2_GND
