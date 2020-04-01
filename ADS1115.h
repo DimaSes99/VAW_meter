@@ -64,6 +64,11 @@
 #define COMP_QUE_4CONV (0x0002<<0)
 #define COMP_DISABLE   (0x0003<<0)
 
+/*
+ 0 - check OS bit to wait end of conversion
+ 1 - check ALLERT pin to wait end of conversion
+ */
+#define USE_ALERT_PIN 0
 
 #include "main.h"
 uint8_t ADS_init(uint16_t confReg); //инициализация АЦП
@@ -73,5 +78,6 @@ void ADS_setMUX(uint16_t mux);  //установка мультеплексор�
 void ADS_startSingleConv(void); //начать одиночное преобразование
 int16_t ADS_readConvReg(void);  //прочесть результат преобразования
 uint8_t ADS_convReady(void);    //проверяет готовность преобразования
+int16_t ADS_readSingle(uint16_t mux);
 #endif	/* ADS1115_H */
 

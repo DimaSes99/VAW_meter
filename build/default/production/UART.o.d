@@ -15,7 +15,11 @@ build/default/production/UART.o.d build/default/production/UART.o: UART.c \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\util\delay.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\util\delay_basic.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\math.h \
- TWI.h ADS1115.h SPI.h PCD8544.h VAW_functions.h
+ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\stdio.h \
+ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stdarg.h \
+ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stddef.h \
+ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\string.h \
+ TWI.h ADS1115.h SPI.h PCD8544.h VAW_functions.h timer_0.h
 
 UART.h:
 
@@ -51,6 +55,14 @@ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\includ
 
 d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\math.h:
 
+d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\stdio.h:
+
+d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stdarg.h:
+
+d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stddef.h:
+
+d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\string.h:
+
 TWI.h:
 
 ADS1115.h:
@@ -60,3 +72,5 @@ SPI.h:
 PCD8544.h:
 
 VAW_functions.h:
+
+timer_0.h:

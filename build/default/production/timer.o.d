@@ -1,6 +1,5 @@
-build/default/production/VAW_functions.o.d \
- build/default/production/VAW_functions.o: VAW_functions.c \
- VAW_functions.h main.h \
+build/default/production/timer.o.d build/default/production/timer.o: \
+ timer.c timer.h main.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\avr\io.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\avr\sfr_defs.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\inttypes.h \
@@ -16,13 +15,9 @@ build/default/production/VAW_functions.o.d \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\util\delay.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\util\delay_basic.h \
  d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\math.h \
- d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\stdio.h \
- d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stdarg.h \
- d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stddef.h \
- d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\string.h \
- TWI.h ADS1115.h SPI.h PCD8544.h UART.h timer_0.h
+ TWI.h ADS1115.h SPI.h PCD8544.h UART.h VAW_functions.h
 
-VAW_functions.h:
+timer.h:
 
 main.h:
 
@@ -56,14 +51,6 @@ d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\includ
 
 d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\math.h:
 
-d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\stdio.h:
-
-d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stdarg.h:
-
-d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stddef.h:
-
-d:\program\ files\microchip\mplabx\v5.20\avr8-gnu-toolchain-win32_x86\avr\include\string.h:
-
 TWI.h:
 
 ADS1115.h:
@@ -74,4 +61,4 @@ PCD8544.h:
 
 UART.h:
 
-timer_0.h:
+VAW_functions.h:

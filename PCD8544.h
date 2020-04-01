@@ -9,9 +9,21 @@
 #define	PCD8544_H
 #include "main.h"
 
-#define RST PB7
-#define CE PB0
-#define DC PB1
+#define RST_GPIO PD7
+#define RST_DDR DDRD
+#define RST_PORT PORTD
+
+#define CE_GPIO PB0
+#define CE_DDR DDRB
+#define CE_PORT PORTB
+
+#define DC_GPIO PB1
+#define DC_DDR DDRB
+#define DC_PORT PORTB
+
+#define LIGHT_GPIO PB2
+#define LIGHT_DDR DDRB
+#define LIGHT_PORT PORTB
 
 void PCD_sendCommand(uint8_t);
 void PCD_sendData(uint8_t);
@@ -19,6 +31,8 @@ void PCD_init();
 void PCD_Clrscr();
 void PCD_setRAMpos(uint8_t x, uint8_t y);
 void PCD_printChar(char);
+void PCD_printChar_10x16(char symbol, uint8_t x, uint8_t y);
+void PCD_print_10x16(char string[], uint8_t x, uint8_t y);
 void PCD_print(char[]);
 void PCD_setCursor(uint8_t x, uint8_t y);
 void PCD_printInt(int32_t);

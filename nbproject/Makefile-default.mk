@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c ADS1115.c PCD8544.c SPI.c TWI.c UART.c VAW_functions.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c ADS1115.c PCD8544.c SPI.c TWI.c UART.c VAW_functions.c timer_0.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ADS1115.o ${OBJECTDIR}/PCD8544.o ${OBJECTDIR}/SPI.o ${OBJECTDIR}/TWI.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/VAW_functions.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ADS1115.o.d ${OBJECTDIR}/PCD8544.o.d ${OBJECTDIR}/SPI.o.d ${OBJECTDIR}/TWI.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/VAW_functions.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ADS1115.o ${OBJECTDIR}/PCD8544.o ${OBJECTDIR}/SPI.o ${OBJECTDIR}/TWI.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/VAW_functions.o ${OBJECTDIR}/timer_0.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ADS1115.o.d ${OBJECTDIR}/PCD8544.o.d ${OBJECTDIR}/SPI.o.d ${OBJECTDIR}/TWI.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/VAW_functions.o.d ${OBJECTDIR}/timer_0.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ADS1115.o ${OBJECTDIR}/PCD8544.o ${OBJECTDIR}/SPI.o ${OBJECTDIR}/TWI.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/VAW_functions.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ADS1115.o ${OBJECTDIR}/PCD8544.o ${OBJECTDIR}/SPI.o ${OBJECTDIR}/TWI.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/VAW_functions.o ${OBJECTDIR}/timer_0.o
 
 # Source Files
-SOURCEFILES=main.c ADS1115.c PCD8544.c SPI.c TWI.c UART.c VAW_functions.c
+SOURCEFILES=main.c ADS1115.c PCD8544.c SPI.c TWI.c UART.c VAW_functions.c timer_0.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I ${DFP_DIR}\include
@@ -152,6 +152,12 @@ ${OBJECTDIR}/VAW_functions.o: VAW_functions.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/VAW_functions.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega8a ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/VAW_functions.o.d" -MT "${OBJECTDIR}/VAW_functions.o.d" -MT ${OBJECTDIR}/VAW_functions.o  -o ${OBJECTDIR}/VAW_functions.o VAW_functions.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
+${OBJECTDIR}/timer_0.o: timer_0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer_0.o.d 
+	@${RM} ${OBJECTDIR}/timer_0.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega8a ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/timer_0.o.d" -MT "${OBJECTDIR}/timer_0.o.d" -MT ${OBJECTDIR}/timer_0.o  -o ${OBJECTDIR}/timer_0.o timer_0.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -194,6 +200,12 @@ ${OBJECTDIR}/VAW_functions.o: VAW_functions.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/VAW_functions.o.d 
 	@${RM} ${OBJECTDIR}/VAW_functions.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega8a ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/VAW_functions.o.d" -MT "${OBJECTDIR}/VAW_functions.o.d" -MT ${OBJECTDIR}/VAW_functions.o  -o ${OBJECTDIR}/VAW_functions.o VAW_functions.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/timer_0.o: timer_0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer_0.o.d 
+	@${RM} ${OBJECTDIR}/timer_0.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega8a ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/timer_0.o.d" -MT "${OBJECTDIR}/timer_0.o.d" -MT ${OBJECTDIR}/timer_0.o  -o ${OBJECTDIR}/timer_0.o timer_0.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 endif
 
