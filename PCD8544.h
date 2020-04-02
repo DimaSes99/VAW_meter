@@ -28,6 +28,7 @@
 void PCD_sendCommand(uint8_t);
 void PCD_sendData(uint8_t);
 void PCD_init();
+void PCD_reinit();
 void PCD_Clrscr();
 void PCD_setRAMpos(uint8_t x, uint8_t y);
 void PCD_printChar(char);

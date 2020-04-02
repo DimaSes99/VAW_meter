@@ -6,7 +6,7 @@
  */
 
 #include "main.h"
-
+#define DISPLAY_REINIT_PERIOD_MS 1000
 
 
 /*
@@ -14,11 +14,16 @@
  */
 
 int main() {
-    //timer0_initFiveMsPeriod();
+    timer0_initFiveMsPeriod();
     ADS_init(PGA_256|DATA_RATE_8|SINGLE_SHOT_MODE);
-    PCD_init();        
-    
+    PCD_init();  
+    PCD_Clrscr();
     while (1) {
+        static uint64_t counter = 0;
+        if (getUptime() - counter >= DISPLAY_REINIT_PERIOD_MS){
+            counter = getUptime();
+            PCD_reinit();
+        }
         int16_t current = getCurrent();
         int16_t voltage =  getVoltage() - (current/100);
         int32_t power = ((int32_t)voltage*(int32_t)current)/(int32_t)1000; 
@@ -76,6 +81,7 @@ int main() {
 //        PCD_print("U="); PCD_printInt(voltageF); PCD_print("   ");
 //        PCD_setCursor(0, 1);
 //        PCD_print("I="); PCD_printInt(currentF);PCD_print("   ");
+        
     }
     return 0;
 }

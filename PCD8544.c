@@ -235,7 +235,19 @@ void PCD_init() {
     PCD_sendCommand(0x14); //bias
     PCD_sendCommand(0x20); //basic instr
     PCD_sendCommand(0x0c); //normal mode
-    PCD_Clrscr();
+    //PCD_Clrscr();
+}
+
+void PCD_reinit(){
+    RST_PORT &= ~(1 << RST_GPIO); //reset chip 
+    RST_PORT |= (1 << RST_GPIO);
+
+    PCD_sendCommand(0x21); //extended instr
+    PCD_sendCommand(0xBA); //vop
+    PCD_sendCommand(0x04); //t coef
+    PCD_sendCommand(0x14); //bias
+    PCD_sendCommand(0x20); //basic instr
+    PCD_sendCommand(0x0c); //normal mode
 }
 
 void PCD_setRAMpos(uint8_t x, uint8_t y) {
