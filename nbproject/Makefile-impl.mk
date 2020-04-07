@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=VAW_meter.X
+PROJECTNAME=VAW_meter
 
 # Active Configuration
 DEFAULTCONF=default

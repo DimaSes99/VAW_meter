@@ -21,18 +21,18 @@ PATH:=D:/Program files/Microchip/MPLABX/v5.30/mplab_platform/platform/../mplab_i
 # Path to java used to run MPLAB X when this makefile was created
 MP_JAVA_PATH="D:\Program files\Microchip\MPLABX\v5.30\sys\java\jre1.8.0_181/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin\avr-gcc.exe"
-MP_CPPC="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin\avr-g++.exe"
+MP_CC="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin\avr-gcc.exe"
+MP_CPPC="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin\avr-g++.exe"
 # MP_BC is not defined
-MP_AS="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin\avr-as.exe"
-MP_LD="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin\avr-ld.exe"
-MP_AR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin\avr-ar.exe"
+MP_AS="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin\avr-as.exe"
+MP_LD="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin\avr-ld.exe"
+MP_AR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin\avr-ar.exe"
 DEP_GEN=${MP_JAVA_PATH}java -jar "D:/Program files/Microchip/MPLABX/v5.30/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin"
-MP_CPPC_DIR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin"
+MP_CC_DIR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin"
+MP_CPPC_DIR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin"
 # MP_BC_DIR is not defined
-MP_AS_DIR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin"
-MP_LD_DIR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin"
-MP_AR_DIR="D:\Program files\Microchip\MPLABX\v5.20\avr8-gnu-toolchain-win32_x86\bin"
+MP_AS_DIR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin"
+MP_LD_DIR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin"
+MP_AR_DIR="D:\Program files\Microchip\avr8-gnu-toolchain-win32_x86\bin"
 # MP_BC_DIR is not defined
 DFP_DIR="D:/Program files/Microchip/MPLABX/v5.30/packs/Microchip/ATmega_DFP/2.0.12"

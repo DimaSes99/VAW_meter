@@ -24,15 +24,16 @@
 #define VOLTAGE_MUX MUX_2_GND
 #define CURRENT_MUX MUX_3_GND
 
-int16_t getCurrent(void);
-int32_t getVoltage(void);
-void sortArray(int16_t array[], uint8_t size);
+int16_t getCurrent(void);   //returns current in mA
+int32_t getVoltage(void);   //returns voltage in mV
 #ifdef USE_MEDIAN_FILTER
+void sortArray(int16_t array[], uint8_t size);  
 int16_t getMedian(int16_t array[], uint8_t size);
 #endif
 #ifdef USE_RUNNING_AVG_FILTER
-float getRunningAvgV(int16_t unfilteredVal);
-float getRunningAvgC(int16_t unfilteredVal);
+typedef enum{
+VOLTAGE_AVG, CURRENT_AVG}running_avg_t;
+float getRunningAvg(int16_t unfilteredVal, running_avg_t type); //running average filter
 #endif
 
 #endif	/* VAW_FUNCTIONS_H */

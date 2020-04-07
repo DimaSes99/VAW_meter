@@ -1,5 +1,5 @@
-build/default/production/main.o.d build/default/production/main.o: main.c \
- main.h \
+build/default/production/button.o.d build/default/production/button.o: \
+ button.c button.h main.h \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\avr\include\avr\io.h \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\avr\include\avr\sfr_defs.h \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\avr\include\inttypes.h \
@@ -19,8 +19,9 @@ build/default/production/main.o.d build/default/production/main.o: main.c \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stdarg.h \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\program\ files\microchip\avr8-gnu-toolchain-win32_x86\avr\include\string.h \
- TWI.h ADS1115.h SPI.h PCD8544.h UART.h VAW_functions.h timer_0.h \
- button.h
+ TWI.h ADS1115.h SPI.h PCD8544.h UART.h VAW_functions.h timer_0.h
+
+button.h:
 
 main.h:
 
@@ -75,5 +76,3 @@ UART.h:
 VAW_functions.h:
 
 timer_0.h:
-
-button.h:

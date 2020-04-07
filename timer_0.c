@@ -46,4 +46,11 @@ ISR(TIMER0_OVF_vect) {
     } else {
         //uptime do not work
     }
+    static uint8_t div = 0;
+    if(div == 2){
+        div = 0;
+        Btn_handler();
+    } else {
+        div++;
+    }
 }

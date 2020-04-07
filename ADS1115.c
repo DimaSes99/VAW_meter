@@ -1,6 +1,6 @@
 #include "ADS1115.h"
 
-uint8_t ADS_init(uint16_t confReg) { //записывает 2 байта в конфигурационный регистр
+void ADS_init(uint16_t confReg) { //записывает 2 байта в конфигурационный регистр
     TWI_init(2, 0);
     ADS_writeReg(ADS_CONF_REG_ADDR, confReg | COMP_QUE_1CONV);
     ADS_writeReg(ADS_HITHR_REG_ADDR, ADS_readReg(ADS_HITHR_REG_ADDR) | 0x0001 << 15);
@@ -8,7 +8,6 @@ uint8_t ADS_init(uint16_t confReg) { //записывает 2 байта в ко
 #if USE_ALERT_PIN==1
     ALLERT_DDR &= ~(1 << ALLERT_GPIO);
 #endif
-    return 1;
 }
 
 uint16_t ADS_readReg(uint8_t regAddress) {

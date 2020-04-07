@@ -71,7 +71,7 @@
 #define USE_ALERT_PIN 0
 
 #include "main.h"
-uint8_t ADS_init(uint16_t confReg); //инициализация АЦП
+void ADS_init(uint16_t confReg); //инициализация АЦП
 uint16_t ADS_readReg(uint8_t regAddress);   //читает регистр по адресу
 void ADS_writeReg(uint8_t regAddress, uint16_t regValue);   //пишет данные по адресу
 void ADS_setMUX(uint16_t mux);  //установка мультеплексора

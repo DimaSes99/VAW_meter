@@ -1,5 +1,6 @@
 #include "VAW_functions.h"
 
+/*Calibration data*/
 int16_t voltageCalDots[5] = {-46, 5757, 11404, 17128, 22862};
 float const voltageCalK[5] = {0.838, 0.839, 0.839, 0.839, 0.838};
 float const voltageCalB[5] = {38.541, 31.707, 36.897, 32.075, 62.870};
@@ -17,7 +18,7 @@ int16_t getCurrent(void) {
     float valFiltered = (float) getMedian(currentArr, SAMPLES); //медиана
 #endif
 #ifdef USE_RUNNING_AVG_FILTER
-    float valFiltered = (float) getRunningAvgC(ADS_readSingle(CURRENT_MUX)); //медиана
+    float valFiltered = getRunningAvg(ADS_readSingle(CURRENT_MUX), CURRENT_AVG); //медиана
 #endif
     float current;
     if (valFiltered < currentCalDots[0]) {
@@ -49,7 +50,7 @@ int32_t getVoltage(void) {
     float valFiltered = (float) getMedian(voltageArr, SAMPLES); //медиана
 #endif
 #ifdef USE_RUNNING_AVG_FILTER
-    float valFiltered = (float) getRunningAvgV(ADS_readSingle(VOLTAGE_MUX)); //медиана
+    float valFiltered = getRunningAvg(ADS_readSingle(VOLTAGE_MUX), VOLTAGE_AVG); //медиана
 #endif
     float voltage;
     if (valFiltered < voltageCalDots[0]) { //преобразование и интерполяция
@@ -68,6 +69,7 @@ int32_t getVoltage(void) {
     return (int16_t) (voltage);
 }
 
+#ifdef USE_MEDIAN_FILTER
 void sortArray(int16_t array[], uint8_t size) {
     for (uint8_t i = 0; i < size - 1; i++) {
         for (uint8_t j = 0; j < size - i - 1; j++) {
@@ -79,9 +81,10 @@ void sortArray(int16_t array[], uint8_t size) {
         }
     }
 }
-#ifdef USE_MEDIAN_FILTER
+
 
 int16_t getMedian(int16_t array[], uint8_t size) {
+    sortArray(array, size);
     if (SAMPLES % 2 == 0) { //четное количество элементов
         return ((int32_t) array[(SAMPLES / 2) - 1]+(int32_t) array[SAMPLES / 2]) / 2;
     } else { //нечетное количество элементов
@@ -90,15 +93,19 @@ int16_t getMedian(int16_t array[], uint8_t size) {
 }
 #endif
 #ifdef USE_RUNNING_AVG_FILTER
-float getRunningAvgV(int16_t unfilteredVal) {
-    static float filteredVal = 0;
-    filteredVal += (unfilteredVal - filteredVal)*FILTER_COEF;
-    return filteredVal;
-}
-
-float getRunningAvgC(int16_t unfilteredVal) {
-    static float filteredVal = 0;
-    filteredVal += (unfilteredVal - filteredVal)*FILTER_COEF;
-    return filteredVal;
+float getRunningAvg(int16_t unfilteredVal, running_avg_t type) {
+    static float filteredVoltageVal = 0;
+    static float filteredCurrentVal = 0;
+    switch (type){
+        case VOLTAGE_AVG:
+            filteredVoltageVal += (unfilteredVal - filteredVoltageVal)*FILTER_COEF;
+            return filteredVoltageVal;
+            break;
+        case CURRENT_AVG:
+            filteredCurrentVal += (unfilteredVal - filteredCurrentVal)*FILTER_COEF;
+            return filteredCurrentVal;
+            break;
+    }
+    return 0;
 }
 #endif

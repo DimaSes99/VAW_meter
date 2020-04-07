@@ -1,4 +1,28 @@
 #include "PCD8544.h"
+
+#define FUNCTION_SET (1<<5)
+    #define ACTIVE_MODE 0
+    #define POWER_DOWN_MODE (1<<3)
+
+    #define HORIZONTAL_ADDRESING 0
+    #define VERTICAL_ADDRESING (1<<1)
+
+    #define BASIC_INSTRUCTION 0
+    #define EXTENDED_INSTRUCTION (1<<0)
+
+#define DISPLAY_CONTROL (1<<3)
+    #define DISPLAY_BLANK 0
+    #define NORMAL_MODE (1<<2)
+    #define ALL_SEGMENTS_ON (1<<0)
+    #define INVERSE_MODE ((1<<0)|(1<<2))
+
+#define SET_Y_ADDRESS (1<<6)
+#define SET_X_ADDRESS (1<<7)
+
+#define TEMPERATURE_CONTROL (1<<2)
+#define BIAS_SYSTEM (1<<4)
+#define SET_VOP (1<<7)
+
 static const char ASCII_5x8[][5] ={
     {0x00, 0x00, 0x00, 0x00, 0x00} // 20  
     ,
@@ -221,20 +245,26 @@ void PCD_init() {
     RST_DDR |= (1 << RST_GPIO);
 
     LIGHT_DDR |= (1 << LIGHT_GPIO);
-    LIGHT_PORT |= (1 << LIGHT_GPIO); // turn off light
+    /*timer 1 settings:
+     *Fast PWM 8 bit on OC1B
+     *No prescaler 
+     */
+    TCCR1A |= (1<<COM1B1)|(1<<COM1B0)|(1<<WGM10); 
+    TCCR1B |= (1<<WGM12)|(1<<CS10);
+    OCR1B = 0;
 
     CE_PORT |= (1 << CE_GPIO); // rst & ce active LOW
     RST_PORT |= (1 << RST_GPIO);
 
     RST_PORT &= ~(1 << RST_GPIO); //reset chip 
     RST_PORT |= (1 << RST_GPIO);
-
-    PCD_sendCommand(0x21); //extended instr
-    PCD_sendCommand(0xBA); //vop
-    PCD_sendCommand(0x04); //t coef
-    PCD_sendCommand(0x14); //bias
-    PCD_sendCommand(0x20); //basic instr
-    PCD_sendCommand(0x0c); //normal mode
+    
+    PCD_sendCommand(FUNCTION_SET|BASIC_INSTRUCTION);
+    PCD_sendCommand(DISPLAY_CONTROL|NORMAL_MODE);
+    PCD_sendCommand(FUNCTION_SET|EXTENDED_INSTRUCTION|HORIZONTAL_ADDRESING); 
+    PCD_sendCommand(TEMPERATURE_CONTROL|0);
+    PCD_sendCommand(BIAS_SYSTEM|3);
+    PCD_sendCommand(SET_VOP|75);
     //PCD_Clrscr();
 }
 
@@ -242,19 +272,27 @@ void PCD_reinit(){
     RST_PORT &= ~(1 << RST_GPIO); //reset chip 
     RST_PORT |= (1 << RST_GPIO);
 
-    PCD_sendCommand(0x21); //extended instr
-    PCD_sendCommand(0xBA); //vop
-    PCD_sendCommand(0x04); //t coef
-    PCD_sendCommand(0x14); //bias
-    PCD_sendCommand(0x20); //basic instr
-    PCD_sendCommand(0x0c); //normal mode
+    PCD_sendCommand(FUNCTION_SET|BASIC_INSTRUCTION);
+    PCD_sendCommand(DISPLAY_CONTROL|NORMAL_MODE);
+    PCD_sendCommand(FUNCTION_SET|EXTENDED_INSTRUCTION|HORIZONTAL_ADDRESING); 
+    PCD_sendCommand(TEMPERATURE_CONTROL|0);
+    PCD_sendCommand(BIAS_SYSTEM|3);
+    PCD_sendCommand(SET_VOP|75);
+}
+
+void PCD_setBacklightLevel(uint8_t level){
+    OCR1B = level;
+}
+
+uint8_t PCD_readBacklightLevel(void){
+    return OCR1B;
 }
 
 void PCD_setRAMpos(uint8_t x, uint8_t y) {
-    PCD_sendCommand(0x20); //basic instr
+    PCD_sendCommand(FUNCTION_SET|BASIC_INSTRUCTION); 
     if ((x >= 0 && x <= 83) && (y >= 0 && y <= 5)) {
-        PCD_sendCommand(0x80 | x);
-        PCD_sendCommand(0x40 | y);
+        PCD_sendCommand(SET_X_ADDRESS | x);
+        PCD_sendCommand(SET_Y_ADDRESS | y);
     }
 }
 

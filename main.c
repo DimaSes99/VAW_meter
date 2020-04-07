@@ -6,7 +6,7 @@
  */
 
 #include "main.h"
-#define DISPLAY_REINIT_PERIOD_MS 1000
+#define DISPLAY_REINIT_PERIOD_MS 30000
 
 
 /*
@@ -14,20 +14,32 @@
  */
 
 int main() {
+    PCD_init();  
+    PCD_setBacklightLevel(0);
+    PCD_Clrscr();
+    Btn_init();
     timer0_initFiveMsPeriod();
     ADS_init(PGA_256|DATA_RATE_8|SINGLE_SHOT_MODE);
-    PCD_init();  
-    PCD_Clrscr();
     while (1) {
-        static uint64_t counter = 0;
-        if (getUptime() - counter >= DISPLAY_REINIT_PERIOD_MS){
-            counter = getUptime();
+        /*Display reinit*/
+        static uint64_t reinitCounter = 0;
+        if(getUptime() - reinitCounter >= DISPLAY_REINIT_PERIOD_MS){
+            reinitCounter = getUptime();
             PCD_reinit();
+        }
+        
+        static uint8_t backlightState = 0;
+        if(Btn_press()== 1){backlightState = !backlightState;}
+        if(backlightState == 1){
+            PCD_setBacklightLevel(50);
+        } else {
+            PCD_setBacklightLevel(0);
         }
         int16_t current = getCurrent();
         int16_t voltage =  getVoltage() - (current/100);
         int32_t power = ((int32_t)voltage*(int32_t)current)/(int32_t)1000; 
         char buff[7];
+        /*Print voltage*/
         memset(buff, 0, sizeof(buff));
         if(voltage < 10){
             sprintf(buff, "U=0.00%d", voltage%1000);
@@ -39,7 +51,7 @@ int main() {
             sprintf(buff, "U=%d.%d", voltage/1000, (voltage%1000)/10);
         }
         PCD_print_10x16(buff, 0, 0);
-        
+        /*Print current*/
         memset(buff, 0, sizeof(buff));
         if(current < 10){
             sprintf(buff, "I=0.00%d", current%1000);
@@ -51,7 +63,7 @@ int main() {
             sprintf(buff, "I=%d.%d", current/1000, (current%1000)/10);
         }
         PCD_print_10x16(buff, 0, 1);   
-        
+        /*Print power*/
         memset(buff, 0, sizeof(buff));
         int16_t powerInt = power/1000;
         int16_t powerFract;

@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/VAW_meter.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=VAW_meter.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=vawmeter.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/VAW_meter.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=VAW_meter.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=vawmeter/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/vawmeter.x/bin
+makeDirectory ${TMPDIR}/vawmeter/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/vawmeter.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/vawmeter.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/vawmeter.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/vawmeter.tar *
 checkReturnCode
 
 # Cleanup
